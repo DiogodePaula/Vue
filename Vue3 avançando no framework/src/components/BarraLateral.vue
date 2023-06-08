@@ -9,13 +9,13 @@
 		<nav class="panel mt-5">
 			<ul>
 				<li>
-					<router-link to="/">
+					<router-link to="/" class="link">
 						<i class="fas fa-tasks"></i>
 						tarefas
 					</router-link>
 				</li>
 				<li>
-					<router-link to="/projetos">
+					<router-link to="/projetos" class="link">
 						<i class="fas fa-project-diagram"></i>
 						projetos
 					</router-link>
@@ -67,8 +67,13 @@ header {
 		height: auto;
 	}
 }
+li {
+	display: flex;
+	align-items: center;
+	justify-content: start;
+}
 .link {
-	color: #fff;
+	color: #fff !important;
 }
 link:hover {
 	color: #faf0ca;
