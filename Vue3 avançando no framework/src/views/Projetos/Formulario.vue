@@ -17,6 +17,9 @@ import { defineComponent } from "vue";
 
 import { useStore } from "@/store";
 import { ALTERA_PROJETO, ADICIONA_PROJETO } from "@/store/tipo-mutacoes";
+import { TipoNotificacao } from "@/interfaces/INotificacoes";
+// import { notificacaoMixin } from "@/mixins/notificar";
+import useNotificador from "@/hooks/notificador";
 
 export default defineComponent({
 	name: "Projetos-vue",
@@ -25,6 +28,7 @@ export default defineComponent({
 			type: String,
 		},
 	},
+	// mixins: [notificacaoMixin],
 	mounted() {
 		if (this.id) {
 			const projeto = this.store.state.projetos.find((proj) => proj.id == this.id);
@@ -49,14 +53,18 @@ export default defineComponent({
 				this.store.commit(ADICIONA_PROJETO, this.nomeDoProjeto);
 			}
 			this.nomeDoProjeto = "";
+			this.notificar(TipoNotificacao.SUCESSO, "Excelente!", "O projeto foi cadastrado com sucesso!");
 			// router fica disponível em qualquer componente
 			this.$router.push("/projetos");
 		},
 	},
 	setup() {
 		const store = useStore();
+		const { notificar } = useNotificador();
+
 		return {
 			store,
+			notificar,
 		};
 	},
 });
